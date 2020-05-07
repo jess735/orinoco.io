@@ -1,0 +1,225 @@
+body{
+    margin: 0px;
+    height: auto;
+    font-family: 'Coming Soon', cursive;
+    font-weight: bold; 
+}
+header{
+    background-color: #f3e9f1;
+}
+main{
+    text-align: center;
+    background-image: url(images/line.png);
+    width: 100%;
+}
+header p{
+    font-size: 1.5em;
+    text-align: center;
+}
+#logo{
+    margin-left: 1%;
+    margin-top: 1%;
+}
+
+.container-fluid{
+    font-family: 'Coming Soon', cursive;
+    color: rgb(249, 249, 250);
+    font-size: 1.5em;
+    font-weight: bolder;
+    padding: 2%; 
+    border-style: solid;   
+    border-width: 2px;   
+    border-radius: 5px;
+    border-color:black;
+    margin: 1%;
+    background-image: url(images/fond.jpg);
+}
+.container-fluid h2{
+    font-size: 2em;
+    text-shadow: -2px 0 rgb(136, 6, 243), 0 2px rgb(136, 6, 243),
+    2px 0 rgb(136, 6, 243), 0 -2px rgb(136, 6, 243)
+}
+.container-fluid p{
+    text-shadow: -2px 0 rgb(136, 6, 243), 0 2px rgb(136, 6, 243),
+    2px 0 rgb(136, 6, 243), 0 -2px rgb(136, 6, 243)
+}
+.panier{
+    color: black;
+    font-family: 'Coming Soon', cursive;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #ffffff;   
+    border-style: solid;   
+    border-width: 1px;   
+    border-radius: 5px;
+    border-color:blueviolet;
+}
+.panier:hover{
+    color: black;
+    background-color: blueviolet;
+}
+
+.boutons{
+   float: right;
+   margin-top: 3%;
+}
+.fa-lock{
+    font-size: 1.2em;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #4A148C;
+    padding: 1%;
+}
+.fa-truck{
+    font-size: 1.2em;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #4A148C;
+    padding: 1%;
+}
+.fa-reply{
+    font-size: 1.2em;
+    font-weight: bold;
+    border-style: solid;
+    border-width: 2px;
+    border-radius: 3px;
+    border-color: #4A148C;
+    padding: 1%;
+}
+.fa-lock:hover, .fa-truck:hover, .fa-reply:hover{
+    border-color: rgb(250, 135, 4);
+
+}
+footer{
+    padding-top: 1%;
+    padding-bottom: 1%;
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: auto;
+    height: auto;
+    background-color: #f3e9f1;
+}
+.fa-facebook{
+    margin: 2%;
+    font-size: 2em;
+    color: rgb(44, 44, 194);
+}
+.fa-google-plus{
+    font-size: 2em;
+    color: rgb(236, 26, 26);
+}
+.fa-facebook:hover, .fa-google-plus:hover{
+    font-size: 2.5em;
+}
+
+/* Liste des articles */
+
+article{
+    border-style: solid;
+    border-radius: 3px;
+    border-color: rgb(89, 84, 94);
+    margin: auto;
+    margin-bottom: 2%;
+    padding: 2%;
+    text-align: center;
+    width: 50%;
+}
+#lien{
+    padding:6px 6px 6px 6px;
+	font:bold 1.2em 'Coming Soon', cursive;
+	background:#f5f5f5;
+	color:rgb(44, 41, 41);
+	border-radius:3px;
+	border:2px solid rgb(70, 64, 64);
+	box-shadow:1px 1px 3px rgb(75, 71, 71); 
+}
+#lien:hover{
+    background-color: rgb(176, 174, 179);
+    transition-duration: 0.1s;
+}
+img{
+    color:rgb(44, 41, 41);
+	border-radius:3px;
+	border:2px solid rgb(70, 64, 64);
+	box-shadow:1px 1px 3px rgb(75, 71, 71);
+}
+#basket, #prixTotal{
+    font-size: 1.3em;
+    font-family: 'Coming Soon', cursive;
+    font-weight: bold; 
+    padding: 5%;
+}
+
+p, label{
+    font-size: 1.3em;
+    font-family: 'Coming Soon', cursive;
+    font-weight: bold; 
+}
+
+/* bouton de la fiche du teddy*/
+
+#liste, #voirPanier, #stockage{
+    color: black;
+    font-family: 'Coming Soon', cursive;
+    font-size: 1em;
+    font-weight: bold;
+    background-color: #ffffff;   
+    border-style: solid;   
+    border-radius: 3px;
+    border-width: 1px;   
+    border-color:rgb(71, 70, 71);
+    margin: 2%;
+}
+#liste:hover, #voirPanier:hover, #stockage:hover{
+    background-color: rgb(176, 174, 179);
+    transition-duration: 0.1s;
+}
+#valider{
+    color: black;
+    font-family: 'Coming Soon', cursive;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #ffffff;   
+    border-style: solid;   
+    border-radius: 3px;
+    border-width: 2px;   
+    border-color:rgb(15, 182, 51);
+    margin: 2%;
+    padding: 1%;
+}
+#valider:hover{
+    background-color: rgb(7, 247, 87);
+    transition-duration: 0.1s;
+}
+#supprime{
+    color: black;
+    font-family: 'Coming Soon', cursive;
+    font-size: 1em;
+    background-color: #ffffff;   
+    border-style: solid;   
+    border-radius: 5px;
+    border-width: 1px;   
+    border-color:rgb(177, 16, 16);
+}
+#supprime:hover{
+    background-color: rgb(235, 32, 18);
+    transition-duration: 0.1s;
+}
+
+
+/* Panier */
+
+.form-group{
+    width: 20%;
+    margin:auto;
+}
+
+
+
+
+/* Confirmation de commande */
