@@ -90,8 +90,8 @@ function achat() {
     
       if(panier != null) {
           Object.values(panier).map( (teddy) => {
-          let id = teddy.id;
-          console.log(id);
+          products =[teddy.id];
+          console.log(products);
 
         });
 
@@ -143,7 +143,7 @@ function achat() {
   
   request.open("post", "http://localhost:3000/api/teddies/order");
   request.setRequestHeader("Content-Type", "application/json");
-  request.send(achat, products);
+  request.send(achat);
 };
 
 
