@@ -2,6 +2,7 @@
 
 let params = new URLSearchParams(document.location.search);
 let id = params.get("id");
+console.log(id);
 
 let _id = id;
 let teddy;
@@ -14,7 +15,7 @@ let article = () => {
     request.onreadystatechange = function () {
         if (this.readyState == 4 && this.status == 200) {
             teddy = JSON.parse(this.responseText);
-            creationPanier();
+            affichageProduit();
         }
     };
     request.open("GET", "http://localhost:3000/api/teddies/" + _id);
@@ -23,10 +24,12 @@ let article = () => {
 
 window.addEventListener('load', article);
 
+let panier = localStorage.getItem('panier');
+panier = JSON.parse(panier);
+localStorage.setItem('panier', JSON.stringify(panier));
+ // Affichage du produit
 
- //      Affichage du produit
-
-function creationPanier() {
+function affichageProduit() {
     
     var article = document.createElement('article');
         var image = document.createElement('img');
@@ -63,7 +66,7 @@ function creationPanier() {
         window.location.href = "panier.html";
     });
 
-    //      choix de la couleur
+    //    choix de la couleur
 
     var label = document.createElement('label');
     label.textContent = "Couleur : ";
@@ -79,13 +82,12 @@ function creationPanier() {
     color.appendChild(option);
     };
 
-    //         panier
- 
-    basket = document.createElement ('button');
-    basket.id = "stockage";
-    basket.textContent = "Ajouter au panier";
+    // Ajout au panier
+    ajoutPanier = document.createElement ('button');
+    ajoutPanier.id = "stockage";
+    ajoutPanier.textContent = "Ajouter au panier";
 
-    basket.addEventListener('click', function() {
+    ajoutPanier.addEventListener('click', function() {
         if(typeof localStorage!='undefined' && JSON) {
             let paniers = {
                 img:teddy.imageUrl,
@@ -95,17 +97,13 @@ function creationPanier() {
                 quantite:1
             };
                 
-            console.log(paniers);
-        
-            let quantite = 1;
-        
-    
+            console.log(paniers);    
+            quantite = 1;      
             let prix = teddy.price/100;
-            
             
             setItems();
 
-            //      envoie au panier et calcul du prix total
+ // envoi au panier et calcul du prix total
 
             function setItems(){
                 let panier = localStorage.getItem('panier');
@@ -152,7 +150,7 @@ function creationPanier() {
     div.appendChild(description);
     div.appendChild(label);
     div.appendChild(color);
-    div.appendChild(basket)
+    div.appendChild(ajoutPanier)
     div.appendChild(liste);
     div.appendChild(voirPanier);
 

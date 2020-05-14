@@ -144,6 +144,7 @@ article{
 }
 img{
     color:rgb(44, 41, 41);
+    width: 40%;
 	border-radius:3px;
 	border:2px solid rgb(70, 64, 64);
 	box-shadow:1px 1px 3px rgb(75, 71, 71);

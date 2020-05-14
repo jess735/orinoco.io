@@ -10,6 +10,7 @@ function commande(){
 
     let productContainer = document.getElementById("recap");
 
+    // Création du message de confirmation de commande
     if( data != null ) {
         productContainer.innerHTML = '';
         Object.values(data).map( () => {
@@ -27,7 +28,7 @@ function commande(){
         ourson.appendChild(div);
     }
 }
-
+// remise à zero de tous les sessions Storage.
 function retour(){
     sessionStorage.clear();
 }

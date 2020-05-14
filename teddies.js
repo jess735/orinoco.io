@@ -9,6 +9,7 @@ var teddy = function (url) {
             resolve(xhr.responseText);
           } else {
             reject(xhr);
+            alert("Nous sommes désolé, le serveur ne répond pas ! ")
           };
         };
       };
@@ -23,7 +24,7 @@ var catchError = function(e){
   console.error('Erreur AJAX', e);
 };
 
-//    Récupération des données
+//    Récupération des données du serveur
 
 teddy();
 var products = function () {
@@ -34,13 +35,17 @@ var products = function () {
 };
 let ourson = document.getElementById('ourson');
 
-
-  // Affiche la liste des articles
+  // Affiche la liste des articles grace à des balises créer en JS
 
   products().then(function(products){
   console.log(products);
+  console.log(products[1]._id);
+  console.log(products[1].name);
+  console.log(products[1].price);
+  console.log(products[1].description);
+  console.log(products[1].colors);
 
-  products.forEach( teddy=>{
+  products.forEach( teddy=> {
   
     var article = document.createElement('article');
 
@@ -63,8 +68,7 @@ let ourson = document.getElementById('ourson');
             link.href = 'produit.html?id=' + teddy._id;
             link.textContent = "Voir l'ourson";
 
-
-    // mise en place des éléments pour les autres articles affichés en boucle
+// mise en place des éléments pour les autres articles affichés en boucle
 
     ourson.appendChild(article);
     article.appendChild(nom);
@@ -73,7 +77,6 @@ let ourson = document.getElementById('ourson');
     div.appendChild(prix);
     div.appendChild(price);
     div.appendChild(link)
-    
-    
   });
 });
+
