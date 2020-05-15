@@ -11,8 +11,10 @@ function commande(){
     let productContainer = document.getElementById("recap");
 
     // Création du message de confirmation de commande
+
     if( data != null ) {
         productContainer.innerHTML = '';
+        // on récupere les données dans l'objet order de la commande dans le LocalStorage
         Object.values(data).map( () => {
             productContainer.innerHTML = 
             `<p>Merci pour votre commande.</p>
@@ -23,6 +25,7 @@ function commande(){
             <p>Toute l'équipe d'Orinoco vous remercie de votre visite.</p>`   
         });    
     } else {
+        // message si la commande n'est pas validé
         var div = document.createElement('div');
         div.textContent = "Vous n'avez pas encore validé votre commande";
         ourson.appendChild(div);

@@ -8,8 +8,7 @@ let _id = id;
 let teddy;
 let paniers;
 
-//  obtention d'un seul produit
-
+//  obtention d'un seul produit à afficher dans la page produit
 let article = () => {
   let request = new XMLHttpRequest();
     request.onreadystatechange = function () {
@@ -21,14 +20,14 @@ let article = () => {
     request.open("GET", "http://localhost:3000/api/teddies/" + _id);
     request.send();
 };
-
+// on affiche l'article demandé à l'ouverture de la page produit
 window.addEventListener('load', article);
 
 let panier = localStorage.getItem('panier');
 panier = JSON.parse(panier);
 localStorage.setItem('panier', JSON.stringify(panier));
- // Affichage du produit
 
+ // Affichage du produit sous forme de petit container
 function affichageProduit() {
     
     var article = document.createElement('article');
@@ -52,13 +51,14 @@ function affichageProduit() {
         var description = document.createElement('p');
         description.textContent = teddy.description;
 
+        // bouton retour à la liste de produit (index.html)
     var liste = document.createElement('button');
     liste.id = "liste";
     liste.textContent = "Retour à la liste";
     liste.addEventListener('click', function() {
         window.location.href = "index.html";
     });
-
+        // bouton voir le panier (panier.html)
     var voirPanier = document.createElement('button');
     voirPanier.id = "voirPanier";
     voirPanier.textContent = "Voir mon panier";
@@ -66,8 +66,7 @@ function affichageProduit() {
         window.location.href = "panier.html";
     });
 
-    //    choix de la couleur
-
+    //  choix de la couleur
     var label = document.createElement('label');
     label.textContent = "Couleur : ";
     var color = document.createElement('select');
@@ -75,6 +74,7 @@ function affichageProduit() {
     var choix = teddy.colors;
     choix.id = "couleur";
 
+    // création d'une boucle For pour afficher la liste déroulante des couleurs du Teddy
     for (var i = 0; i < choix.length; i++) {
     var option = document.createElement('option');
     option.textContent = choix[i];
@@ -82,7 +82,7 @@ function affichageProduit() {
     color.appendChild(option);
     };
 
-    // Ajout au panier
+    // bouton Ajout au panier
     ajoutPanier = document.createElement ('button');
     ajoutPanier.id = "stockage";
     ajoutPanier.textContent = "Ajouter au panier";
@@ -104,7 +104,6 @@ function affichageProduit() {
             setItems();
 
  // envoi au panier et calcul du prix total
-
             function setItems(){
                 let panier = localStorage.getItem('panier');
                 panier = JSON.parse(panier);
@@ -138,7 +137,7 @@ function affichageProduit() {
         };
     });
 
-    // mise en place des éléments
+    // mise en place des éléments dans le DOM
  
     produit.appendChild(article);
     article.appendChild(nom);

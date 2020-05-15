@@ -5,15 +5,15 @@ function affichagePanier(){
   let data = localStorage.getItem('panier');
   data = JSON.parse(data);
 
-
+//on enregistre les valeurs du prix total dans une variable
   var total = localStorage.getItem('prixTotal');
   var prixTotal = document.getElementById('total');
 
-// affichage du prix total du panier
+// affichage du prix total du panier si le panier contient quelque chose...Sinon on affiche "votre panier est vide"
   if (total != null) {
     prixTotal.textContent = 'Le montant de votre commande est de : ' + total +  ' €';
     prixTotal.id = 'prixTotal'; 
-  } else {
+  } else  {
     prixTotal.textContent = 'Le montant de votre commande est de : 0 €';
   }
 
@@ -26,6 +26,7 @@ function affichagePanier(){
     basket.appendChild(div);
   } else {
     productContainer.innerHTML = '';
+    //on récupere les valeurs dans le localStorage pour les afficher sous forme de petit container pour le panier
     Object.values(data).map( (teddy) => {
     
       var article = document.createElement('article');
@@ -42,7 +43,7 @@ function affichagePanier(){
       supprime.textContent = "supprimer l'article";
       supprime.id = "supprime";
                
-      // mise en place des éléments 
+      // mise en place des éléments dans le DOM
     
       basket.appendChild(article);
                               
@@ -55,8 +56,10 @@ function affichagePanier(){
 
     }); 
   }; 
+  // on appelle la fonction "supprimer le produit" dans le container de l'article au panier
 deleteButtons();
 };
+// on appelle la fonction "affichage panier" pour afficher les produits au panier 
 affichagePanier();
 
 //  Suppression d'un article
@@ -67,6 +70,7 @@ function deleteButtons() {
   let article = localStorage.getItem('panier');
   article = JSON.parse(article);
 
+// on fait une boucle For pour afficher les boutons "supprimer produits" autant de fois qu'il y a un article au panier
   for(let i=0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', () => {
       nomProduit = deleteButtons[i].parentElement.firstChild.textContent;
@@ -74,6 +78,7 @@ function deleteButtons() {
       localStorage.setItem('prixTotal', prixTotal - (article[nomProduit].prix));
 
       delete article[nomProduit];
+      //une petite alerte pour dire qu'un article à été supprimé.
       alert('Vous avez supprimé '+ nomProduit + ' de votre panier ! ')
       localStorage.setItem('panier', JSON.stringify(article));
       window.location.reload();
@@ -81,7 +86,6 @@ function deleteButtons() {
     });
   };
 };
-
 
 //  requete finale de commande contenant les informations de contact et les Id produit
 function achat() {
@@ -93,9 +97,10 @@ function achat() {
 if (panier == null || total == 0){
   alert("Votre panier est vide, vous ne pouvez pas passer une commande ! ")
  }  
-
+// on déclare un tableau de produits pour la requete POST plus tard
  let products = [];
 
+ // on fait une fonction pour récupérer les id des produits au panier, pour l'afficher dans la requete POST
   function productId() {
     let panier = JSON.parse(localStorage.getItem('panier'));
 
@@ -105,7 +110,7 @@ if (panier == null || total == 0){
         });
     };
     productId();
-    // Récupérer la valeur des champs
+    // Récupérer la valeur des champs saisis par le client
      
     let firstName = document.getElementById('firstname').value;
     let lastName = document.getElementById('name').value;
@@ -113,7 +118,7 @@ if (panier == null || total == 0){
     let address = document.getElementById('address').value;
     let city = document.getElementById('city').value;
 
-  // Mettre les valeurs dans un objet
+  // on met les valeurs dans un objet pour la requete POST
   
     let contact = {
         "firstName": firstName,

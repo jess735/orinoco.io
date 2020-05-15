@@ -1,4 +1,4 @@
-//    Connexion à l'API
+//    Connexion à l'API pour récupération des données du serveur
 var teddy = function (url) {
     return new Promise(function (resolve, reject) {
       var xhr = new XMLHttpRequest();
@@ -9,6 +9,7 @@ var teddy = function (url) {
             resolve(xhr.responseText);
           } else {
             reject(xhr);
+            // alerte si le serveur ne répond pas
             alert("Nous sommes désolé, le serveur ne répond pas ! ")
           };
         };
@@ -19,12 +20,12 @@ var teddy = function (url) {
       xhr.send();
     });
   };
-
+// affiche une erreur si la requete AJAX ne fonctionne pas
 var catchError = function(e){
   console.error('Erreur AJAX', e);
 };
 
-//    Récupération des données du serveur
+//  Récupération des données du serveur grace à la requete précedente
 
 teddy();
 var products = function () {
@@ -35,7 +36,7 @@ var products = function () {
 };
 let ourson = document.getElementById('ourson');
 
-  // Affiche la liste des articles grace à des balises créer en JS
+  // Affiche dynamiquement de la liste des articles grace à JS
 
   products().then(function(products){
   console.log(products);
@@ -45,6 +46,7 @@ let ourson = document.getElementById('ourson');
   console.log(products[1].description);
   console.log(products[1].colors);
 
+  // forEach pour afficher Chaque produits à la suite sous forme de liste
   products.forEach( teddy=> {
   
     var article = document.createElement('article');
@@ -68,7 +70,7 @@ let ourson = document.getElementById('ourson');
             link.href = 'produit.html?id=' + teddy._id;
             link.textContent = "Voir l'ourson";
 
-// mise en place des éléments pour les autres articles affichés en boucle
+// mise en place des éléments pour les autres articles affichés en boucle dans le DOM
 
     ourson.appendChild(article);
     article.appendChild(nom);
