@@ -4,6 +4,7 @@ body{
     font-family: 'Coming Soon', cursive;
     font-weight: bold; 
 }
+
 header{
     background-color: #f3e9f1;
 }
@@ -23,7 +24,7 @@ header p{
 
 .container-fluid{
     font-family: 'Coming Soon', cursive;
-    color: rgb(249, 249, 250);
+    color: rgb(238, 238, 240);
     font-size: 1.5em;
     font-weight: bolder;
     padding: 2%; 
@@ -39,7 +40,8 @@ header p{
     text-shadow: -2px 0 rgb(136, 6, 243), 0 2px rgb(136, 6, 243),
     2px 0 rgb(136, 6, 243), 0 -2px rgb(136, 6, 243)
 }
-.container-fluid p{
+.container-fluid #intro{
+    color: rgb(238, 238, 240);
     text-shadow: -2px 0 rgb(136, 6, 243), 0 2px rgb(136, 6, 243),
     2px 0 rgb(136, 6, 243), 0 -2px rgb(136, 6, 243)
 }
@@ -124,19 +126,19 @@ article{
     border-radius: 3px;
     border-color: rgb(89, 84, 94);
     margin: auto;
-    margin-bottom: 2%;
-    padding: 2%;
+    margin-bottom: 1%;
+    padding: 1%;
     text-align: center;
-    width: 50%;
 }
 #lien{
-    padding:6px 6px 6px 6px;
+    padding:6px 6px 6px ;
 	font:bold 1.2em 'Coming Soon', cursive;
 	background:#f5f5f5;
 	color:rgb(44, 41, 41);
 	border-radius:3px;
 	border:2px solid rgb(70, 64, 64);
-	box-shadow:1px 1px 3px rgb(75, 71, 71); 
+    box-shadow:1px 1px 3px rgb(75, 71, 71); 
+
 }
 #lien:hover{
     background-color: rgb(176, 174, 179);
@@ -200,18 +202,25 @@ p, label{
 #supprime{
     color: black;
     font-family: 'Coming Soon', cursive;
-    font-size: 1em;
+    font-size: 0.7em;
     background-color: #ffffff;   
     border-style: solid;   
     border-radius: 5px;
     border-width: 1px;   
     border-color:rgb(177, 16, 16);
+    margin: auto;
 }
 #supprime:hover{
     background-color: rgb(235, 32, 18);
     transition-duration: 0.1s;
 }
-
+#teddy{
+    font-size: 1.5em;
+    color: black;
+    font-weight: bold;
+    font-family: 'Coming Soon', cursive;
+    margin: auto;
+}
 
 /* Panier */
 
@@ -219,8 +228,29 @@ p, label{
     width: 20%;
     margin:auto;
 }
-
-
+#produit{
+    margin: auto;
+    width: 50%;
+}
+article h3, p{
+    font-size: 1em;
+    font-weight: bold;
+    color: rgb(5, 5, 5);
+    margin: 5%;
+}
+#price::after{
+content: " €";
+}
+#articlePanier, #articleListe{
+    border-style: solid;
+    border-radius: 3px;
+    border-color: rgb(89, 84, 94);
+    margin: auto;
+    margin-bottom: 1%;
+    padding: 1%;
+    text-align: center;
+    width: 40%;
+}
 
 
 /* Confirmation de commande */

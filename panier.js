@@ -1,5 +1,17 @@
-//    Affichage du panier
+//Mise a jour du nombre de produit dans l'onglet panier
+function chargementPanier(){
+  let nombreProduit = localStorage.getItem('qté'); 
+  
+  if(nombreProduit){
+  document.querySelector ('.totalQté').textContent = nombreProduit;
+  }else{
+      document.querySelector ('.totalQté').textContent = 0 ;
+  }
+}
 
+chargementPanier(); 
+
+//    Affichage des articles mis au panier dans la page panier
 function affichagePanier(){
 
   let data = localStorage.getItem('panier');
@@ -7,14 +19,14 @@ function affichagePanier(){
 
 //on enregistre les valeurs du prix total dans une variable
   var total = localStorage.getItem('prixTotal');
-  var prixTotal = document.getElementById('total');
+  var prixPanier = document.getElementById('total');
 
 // affichage du prix total du panier si le panier contient quelque chose...Sinon on affiche "votre panier est vide"
   if (total != null) {
-    prixTotal.textContent = 'Le montant de votre commande est de : ' + total +  ' €';
-    prixTotal.id = 'prixTotal'; 
+    prixPanier.textContent = 'Le montant de votre commande est de : ' + total +  ' €';
+    prixPanier.id = 'prixTotal'; 
   } else  {
-    prixTotal.textContent = 'Le montant de votre commande est de : 0 €';
+    prixPanier.textContent = 'Le montant de votre commande est de : 0 €';
   }
 
 // affichage des produits au panier sous forme de petites fiches articles
@@ -30,30 +42,37 @@ function affichagePanier(){
     Object.values(data).map( (teddy) => {
     
       var article = document.createElement('article');
-                    
+      article.id = "articlePanier";
+      var nom = document.createElement('h2');
+      nom.textContent = teddy.name;
       var image = document.createElement('img');
-      image.src =  teddy.img;
-              
+      image.src =  teddy.imageUrl;
       var div = document.createElement('div');
-      var nom = document.createElement('p');
-      nom.textContent = teddy.nom;
-      var prix = document.createElement('p');
-      prix.textContent = 'Prix: ' + teddy.prix + ' €';  
+      div.id = "produit";
+      var quantite = document.createElement('h3');
+      quantite.textContent = 'Quantité: ';
+      var qté = document.createElement('p');
+      qté.textContent =  teddy.qté;
+      var prix = document.createElement('h3');
+      prix.textContent = 'Prix: '; 
+      var price = document.createElement('p');
+      price.textContent = teddy.price;
+      price.id = "price";  
       var supprime = document.createElement('button');
       supprime.textContent = "supprimer l'article";
       supprime.id = "supprime";
                
       // mise en place des éléments dans le DOM
     
-      basket.appendChild(article);
-                              
+      basket.appendChild(article);  
+      article.appendChild(nom);                   
       article.appendChild(image);
-      article.appendChild(div);
-                    
-      div.appendChild(nom);
+      article.appendChild(div);         
+      div.appendChild(quantite);
+      div.appendChild(qté);
       div.appendChild(prix);
+      div.appendChild(price);
       div.appendChild(supprime);
-
     }); 
   }; 
   // on appelle la fonction "supprimer le produit" dans le container de l'article au panier
@@ -63,28 +82,49 @@ deleteButtons();
 affichagePanier();
 
 //  Suppression d'un article
-function deleteButtons() {
-  let deleteButtons = document.querySelectorAll('#basket #supprime');
-  let nomProduit;
-  let prixTotal = localStorage.getItem("prixTotal");
-  let article = localStorage.getItem('panier');
-  article = JSON.parse(article);
+function deleteButtons() {  
+  let deleteButtons = document.querySelectorAll('#supprime');
+  let nomProduit ;
+  let nombreTotalDeProduit = localStorage.getItem('qté');
+  nombreTotalDeProduit = parseInt(nombreTotalDeProduit);
+  let coutDuPanier = localStorage.getItem("prixTotal");
+  coutDuPanier = parseInt(coutDuPanier);
+  let data = JSON.parse(localStorage.getItem('panier'));
 
 // on fait une boucle For pour afficher les boutons "supprimer produits" autant de fois qu'il y a un article au panier
-  for(let i=0; i < deleteButtons.length; i++) {
+  
+for(let i=0; i < deleteButtons.length; i++) {
     deleteButtons[i].addEventListener('click', () => {
-      nomProduit = deleteButtons[i].parentElement.firstChild.textContent;
-    
-      localStorage.setItem('prixTotal', prixTotal - (article[nomProduit].prix));
+      // récupération du nom du teddy pour plus tard
+      nomProduit = deleteButtons[i].parentElement.parentElement.firstChild.innerText.trim();
+      console.log(nomProduit);
+      // récupération du qté du teddy pour calculs de la suppression
+      qté = deleteButtons[i].parentElement.children[1].textContent;
+      //conversion du string en number
+      qté = parseInt(qté);
+      // récupération du prix du teddy pour calculs de la suppression
+      let price = deleteButtons[i].parentElement.children[3].textContent;
+       //conversion du string en number
+      price = parseInt(price);
+      //calcul de la qté dans le panier après suppression de l'article
+      calculQte = nombreTotalDeProduit - qté;
+      localStorage.setItem('qté', calculQte);
+      //calcul du prix dans le panier après suppression de l'article
+      calculPrice = coutDuPanier - qté * price;
+      localStorage.setItem('prixTotal', calculPrice);
+      // on supprime la ligne du teddy correspondant au bouton supprimer
+      delete data[nomProduit];
 
-      delete article[nomProduit];
-      //une petite alerte pour dire qu'un article à été supprimé.
+      // une petite alerte pour dire qu'un article à été supprimé.
       alert('Vous avez supprimé '+ nomProduit + ' de votre panier ! ')
-      localStorage.setItem('panier', JSON.stringify(article));
+      // on actualise le LocalStorage et recharge la page pour une mise a jour
+      localStorage.setItem('panier', JSON.stringify(data));
       window.location.reload();
+    
       affichagePanier();
-    });
-  };
+      chargementPanier(); 
+     });
+    }; 
 };
 
 //  requete finale de commande contenant les informations de contact et les Id produit
@@ -105,7 +145,7 @@ if (panier == null || total == 0){
     let panier = JSON.parse(localStorage.getItem('panier'));
 
          idProduct = Object.values(panier).map( (teddy) => {
-          products.push(teddy.id);
+          products.push(teddy._id);
           console.log(products); return products;
         });
     };
@@ -173,7 +213,7 @@ if (panier == null || total == 0){
            prix = JSON.parse(prix);
            sessionStorage.setItem('prix', JSON.stringify(prix));
            window.location.href = "commande.html";
-           localStorage.clear();
+          localStorage.clear();
          }
        };
   request.open("post", "http://localhost:3000/api/teddies/order");

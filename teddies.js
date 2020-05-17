@@ -1,3 +1,15 @@
+//Mise a jour du nombre de produit dans l'onglet panier
+function chargementPanier(){
+  let nombreProduit = localStorage.getItem('qté'); 
+  
+  if(nombreProduit){
+  document.querySelector ('.totalQté').textContent = nombreProduit;
+  }else{
+      document.querySelector ('.totalQté').textContent = 0 ;
+  }
+}
+
+chargementPanier(); 
 //    Connexion à l'API pour récupération des données du serveur
 var teddy = function (url) {
     return new Promise(function (resolve, reject) {
@@ -14,9 +26,7 @@ var teddy = function (url) {
           };
         };
       };
-
       xhr.open('GET','http://localhost:3000/api/teddies/', true);
-     
       xhr.send();
     });
   };
@@ -27,7 +37,6 @@ var catchError = function(e){
 
 //  Récupération des données du serveur grace à la requete précedente
 
-teddy();
 var products = function () {
   return teddy('http://localhost:3000/api/teddies/').then(function (response) {
     var products = JSON.parse(response);
@@ -40,16 +49,13 @@ let ourson = document.getElementById('ourson');
 
   products().then(function(products){
   console.log(products);
-  console.log(products[1]._id);
-  console.log(products[1].name);
-  console.log(products[1].price);
-  console.log(products[1].description);
-  console.log(products[1].colors);
+  
 
   // forEach pour afficher Chaque produits à la suite sous forme de liste
   products.forEach( teddy=> {
   
     var article = document.createElement('article');
+    article.id= "articleListe";
 
       var image = document.createElement('img');
       image.src =  teddy.imageUrl;
@@ -57,11 +63,12 @@ let ourson = document.getElementById('ourson');
         var div = document.createElement('div');
           var nom = document.createElement('h3');
           nom.textContent = teddy.name;
+          nom.id = "teddy";
 
           var prix = document.createElement('h4');
           prix.textContent = 'Prix :';
             var price = document.createElement('p');
-            price.textContent = teddy.price/100 + ' €';
+            price.textContent = teddy.price + ' €';
     
           var id = teddy._id;
 

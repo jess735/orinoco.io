@@ -1,3 +1,16 @@
+//Mise a jour du nombre de produit dans l'onglet panier
+function chargementPanier(){
+    let nombreProduit = localStorage.getItem('qté'); 
+    
+    if(nombreProduit){
+    document.querySelector ('.totalQté').textContent = nombreProduit;
+    }else{
+        document.querySelector ('.totalQté').textContent = 0 ;
+    }
+}
+
+chargementPanier(); 
+
 //  récupération de l'id produit dans l'url
 
 let params = new URLSearchParams(document.location.search);
@@ -33,18 +46,16 @@ function affichageProduit() {
     var article = document.createElement('article');
         var image = document.createElement('img');
         image.src =  teddy.imageUrl;
-    
         id =  teddy._id;
-        
     var div = document.createElement('div');
         var nom = document.createElement('h3');
         nom.textContent = teddy.name;
-        nom.id = "nom";
+        nom.id = "teddy";
     
         var prix = document.createElement('h4');
         prix.textContent = 'Prix :';
         var price = document.createElement('p');
-        price.textContent = teddy.price/100 + ' €';
+        price.textContent = teddy.price + ' €';
     
         var desc = document.createElement('h4');
         desc.textContent = 'Description :';
@@ -88,55 +99,53 @@ function affichageProduit() {
     ajoutPanier.textContent = "Ajouter au panier";
 
     ajoutPanier.addEventListener('click', function() {
-        if(typeof localStorage!='undefined' && JSON) {
-            let paniers = {
-                img:teddy.imageUrl,
-                id:teddy._id,
-                nom:document.getElementById('nom').textContent,
-                prix: teddy.price/100,
-                quantite:1
-            };
-                
-            console.log(paniers);    
-            quantite = 1;      
-            let prix = teddy.price/100;
-            
-            setItems();
+        alert('Vous avez ajouté ' + teddy.name + ' à votre panier')
+        ajoutLocalStorage()
+        nombreProduit()
+        prixTotal()
+      //Mise a jour du nombre de produit
+function nombreProduit(){  
+    let nombreProduit = localStorage.getItem('qté');  
+    nombreProduit = parseInt(nombreProduit);
+    
+    if (nombreProduit){
+        localStorage.setItem("qté", nombreProduit + 1);
+        document.querySelector ('.totalQté').textContent = nombreProduit + 1;
+    } else{
+        localStorage.setItem("qté", 1);
+       document.querySelector ('.totalQté').textContent = 1;
+    }
+} 
+//Mise a jour du nombre de produit dans l'objet "qté:" 
+function ajoutLocalStorage(){
+    let panier = localStorage.getItem('panier');
+    panier = JSON.parse(panier);
+    teddy.qté = 0;
+    
+    if(panier != null){
 
- // envoi au panier et calcul du prix total
-            function setItems(){
-                let panier = localStorage.getItem('panier');
-                panier = JSON.parse(panier);
-                let article = paniers.nom;
-                let prixTotal = localStorage.getItem('prixTotal');
-                prixTotal = parseInt(prixTotal);
-                prix = parseInt(prix);
-                if (panier != null) {
-                    if(panier[article] == undefined) {
-                        panier = {
-                            ...panier,
-                            [article]:paniers
-                        };
-                    localStorage.setItem('prixTotal', prixTotal + prix);
-                    alert('Article ajouté au panier');
-                    } else {
-                    alert('Article déjà ajouté au panier');
-                    };           
-                } else {
-                    panier = {
-                        [article]:paniers
-                        };
-                    localStorage.setItem('prixTotal', prix );
-                    alert('Article ajouté au panier');
-                };
-            localStorage.setItem('panier', JSON.stringify(panier));
-            };
+        if(panier[teddy.name] === undefined) {
+            panier = {...panier, [teddy.name] : teddy}
+        }
+        panier[teddy.name].qté += 1;
+    } else {
+        panier = {[teddy.name] : teddy}
+        panier[teddy.name].qté += 1;
+    }
+    localStorage.setItem("panier", JSON.stringify(panier));
+}
+function prixTotal(){
+    let price = parseInt(teddy.price);
+    let prixDuPanier = JSON.parse(localStorage.getItem('prixTotal'));
+    
+    if(prixDuPanier != null){
+        localStorage.setItem("prixTotal", prixDuPanier + price);
+    } else {
+        localStorage.setItem("prixTotal", price);
+    }
+}
 
-        } else {
-            alert("localStorage n'est pas supporté");
-        };
-    });
-
+})
     // mise en place des éléments dans le DOM
  
     produit.appendChild(article);
