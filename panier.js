@@ -128,6 +128,9 @@ for(let i=0; i < deleteButtons.length; i++) {
 };
 
 //  requete finale de commande contenant les informations de contact et les Id produit
+var formValid = document.getElementById('valider');
+formValid.addEventListener ('click', achat);
+
 function achat() {
 
 // integration d'une alerte si le panier est vide, on ne peut pas passer commande  
@@ -175,34 +178,59 @@ if (panier == null || total == 0){
   };
 
   let achat = JSON.stringify(objt);
-  console.log(achat);
-  console.log(products);
+ // console.log(achat);
+ // console.log(products);
   
   //afficher une alerte si il manque un renseignement et enregistrer les données dans le localStorage
+  var prenom = document.getElementById('firstname');
+  var oublisPrenom = document.getElementById('oublisPrenom');
+  var prenomValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
 
-if(firstName == ""){
-    alert('Vous devez compléter votre prenom !');
-    return true;
-}
-if(lastName == ""){
-    alert('Vous devez compléter votre nom !');
-    return true;
-}
-if(email == ""){
-    alert('Vous devez compléter votre e-mail !');
-    return true;
-  }
-if(address == ""){
-    alert('Vous devez compléter votre adresse !');
-    return true;
-}
-if(city == ""){
-    alert('Vous devez compléter votre ville !');
-    return true;
-}
-if (panier == null || total == 0){
-  return true;
-}else{
+  var nom = document.getElementById('name');
+  var oublisNom = document.getElementById('oublisNom');
+  var nomValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+
+  var mail = document.getElementById('email');
+  var oublisEmail = document.getElementById('oublisEmail');
+  var mailValid = /^[a-z0-9._-]+@[a-z0-9.-]{2,}[.][a-z]{2,3}$/;
+
+  var adresse = document.getElementById('address');
+  var oublisAdress = document.getElementById('oublisAdress');
+  var adresseValid = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*/;
+
+  var ville = document.getElementById('city');
+  var oublisVille = document.getElementById('oublisVille');
+  var villeValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+
+  if (prenomValid.test(prenom.value) == false){
+    oublisPrenom.textContent = "Format de votre prénom incorrect";
+    oublisPrenom.style.color = 'red';
+    return event.preventDefault();
+
+  } else if (nomValid.test(nom.value) == false){
+    oublisNom.textContent = "Format de votre nom incorrect";
+    oublisNom.style.color = 'red';
+    return event.preventDefault();
+
+  } else if (mailValid.test(mail.value) == false){
+    oublisEmail.textContent = "Format de votre e-mail incorrect";
+    oublisEmail.style.color = 'red';
+    return event.preventDefault();
+
+  } else if (adresseValid.test(adresse.value) == false){
+    oublisAdress.textContent = "Format de votre adresse incorrect";
+    oublisAdress.style.color = 'red';
+    return event.preventDefault();
+
+  } else if (villeValid.test(ville.value) == false){
+    oublisVille.textContent = "Format de votre ville incorrect";
+    oublisVille.style.color = 'red';
+    return event.preventDefault();
+
+  } else if (panier == null || total == 0){
+    return event.preventDefault();
+ 
+  } else {
   // si tout à été bien rempli, on envoi la commande au serveur, avec toutes les coordonnées du client
   let request = new XMLHttpRequest();
        request.onreadystatechange = function () {
@@ -213,7 +241,7 @@ if (panier == null || total == 0){
            prix = JSON.parse(prix);
            sessionStorage.setItem('prix', JSON.stringify(prix));
            window.location.href = "commande.html";
-          localStorage.clear();
+           localStorage.clear();
          }
        };
   request.open("post", "http://localhost:3000/api/teddies/order");
@@ -222,6 +250,6 @@ if (panier == null || total == 0){
 } 
 
 }
-  
+
 
 

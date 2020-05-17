@@ -25,33 +25,33 @@
          <div id="total"></div>
   
   
-    <form id="formulaire">
+    <form id="formulaire" method="POST" >
       <div class="form-row">
         <div class="form-group col-md-5">
             <label for="firstname">Prénom :</label>
-            <input type="text" name="firstName" class="form-control" id="firstname" placeholder="Votre prénom..." pattern="([a-zA-Z\u00C0-\u00FF]+([\s'-.]?)[a-zA-Z\u00C0-\u00FF]+){1,30}" required>
+            <input type="text" name="firstName" class="form-control" id="firstname" placeholder="Votre prénom..." required><span id='oublisPrenom'></span><br>
         </div>
         <div class="form-group col-md-5">
             <label for="name">Nom :</label>
-            <input type="text" name="lastName" class="form-control" id="name" placeholder="Votre nom..." pattern="([a-zA-Z\u00C0-\u00FF]+([\s'-.]?)[a-zA-Z\u00C0-\u00FF]+){1,30}" required>
+            <input type="text" name="lastName" class="form-control" id="name" placeholder="Votre nom..." required><span id='oublisNom'></span><br>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-md-5">
             <label for="email">Email :</label>
-            <input type="email" name="email" class="form-control" id="email" placeholder="Votre email@email.fr" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}" required>
+            <input type="email" name="email" class="form-control" id="email" placeholder="Votre email@email.fr" required><span id='oublisEmail'></span><br>
         </div>
         <div class="form-group col-md-5">
             <label for="address">Adresse :</label>
-            <input type="text" name="address" class="form-control" id="address" placeholder="6, Rue du Moulin" pattern="([a-zA-Z0-9\u00C0-\u00FF\s'\-,.]+){1,100}" required>
+            <input type="text" name="address" class="form-control" id="address" placeholder="6, Rue du Moulin" required><span id='oublisAdress'></span><br>
         </div>
     </div>
         <div class="form-group col-md-8">
             <label for="city">Ville :</label>
-            <input type="text" name="city" class="form-control" id="city" placeholder="Votre ville..." pattern="([a-zA-Z\u00C0-\u00FF]+([\s'-.]?)[a-zA-Z\u00C0-\u00FF]+){1,50}" required>
+            <input type="text" name="city" class="form-control" id="city" placeholder="Votre ville..." required><span id='oublisVille'></span><br>
         </div>
   
-      <button type="button" onclick="achat()" id="valider">Valider mon panier</button>
+      <button type="submit" id="valider">Valider mon panier</button>
      
     </form>
   
