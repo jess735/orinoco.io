@@ -20,7 +20,8 @@ function commande(){
             `<p>Merci pour votre commande.</p>
 
             <p>Celle-ci a été enregistrée sous le numéro :  ${data.orderId},
-            pour un montant total de ${prix} €.</p>
+            pour un montant total de ${prix} €.
+            </p>
                 
             <p>Toute l'équipe d'Orinoco vous remercie de votre visite.</p>`   
         });    

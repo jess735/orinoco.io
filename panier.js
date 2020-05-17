@@ -146,11 +146,12 @@ if (panier == null || total == 0){
  // on fait une fonction pour récupérer les id des produits au panier, pour l'afficher dans la requete POST
   function productId() {
     let panier = JSON.parse(localStorage.getItem('panier'));
-
-         idProduct = Object.values(panier).map( (teddy) => {
-          products.push(teddy._id);
-          console.log(products); return products;
+    
+         idProduct = Object.values(panier).map( (data) => {
+          products.push(data._id); 
+          return products;
         });
+      
     };
     productId();
     // Récupérer la valeur des champs saisis par le client
