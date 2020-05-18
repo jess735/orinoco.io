@@ -19,11 +19,13 @@ function commande(){
             productContainer.innerHTML = 
             `<p>Merci pour votre commande.</p>
 
-            <p>Celle-ci a été enregistrée sous le numéro :  ${data.orderId},
-            pour un montant total de ${prix} €.
+            <p>Celle-ci a été enregistrée sous le numéro : <span class="gras"> ${data.orderId}</span>,
+            pour un montant total de <span class="gras">${prix} €</span>.
             </p>
                 
-            <p>Toute l'équipe d'Orinoco vous remercie de votre visite.</p>`   
+            <p>Toute l'équipe d'Orinoco vous remercie pour votre achat.<br><br>
+            
+            <i class="fas fa-paw"></i> <i class="fas fa-paw"></i> <span class="abientot"> A BIENTÔT </span> <i class="fas fa-paw"></i> <i class="fas fa-paw"></i></p>`   
         });    
     } else {
         // message si la commande n'est pas validé

@@ -254,3 +254,31 @@ content: " €";
 
 
 /* Confirmation de commande */
+
+#recap{
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+.fa-check{
+    color : green;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.fa-paw{
+    color : rgb(75, 29, 29);
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.abientot{
+    color : rgb(75, 29, 29);
+    font-family: 'Coming Soon', cursive;
+    font-size: 1.5em;
+    font-weight: bold;
+}
+.gras{
+    color : green;
+    font-family: 'Coming Soon', cursive;
+    font-size: 1.2em;
+    font-weight: bold;
+}
