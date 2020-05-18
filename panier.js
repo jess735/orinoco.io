@@ -14,8 +14,8 @@ chargementPanier();
 //    Affichage des articles mis au panier dans la page panier
 function affichagePanier(){
 
-  let data = localStorage.getItem('panier');
-  data = JSON.parse(data);
+  let data = JSON.parse(localStorage.getItem('panier'));
+
 
 //on enregistre les valeurs du prix total dans une variable
   var total = localStorage.getItem('prixTotal');
