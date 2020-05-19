@@ -2,11 +2,8 @@
 
 function commande(){
 
-    let data = sessionStorage.getItem('order');
-    data = JSON.parse(data);
-    let prix = sessionStorage.getItem('prix');
-    prix = JSON.parse(prix);
-
+    let data = JSON.parse(sessionStorage.getItem('order'));
+    let prix = JSON.parse(sessionStorage.getItem('prix'));
 
     let productContainer = document.getElementById("recap");
 
@@ -16,6 +13,8 @@ function commande(){
         productContainer.innerHTML = '';
         // on récupere les données dans l'objet order de la commande dans le LocalStorage
         Object.values(data).map( () => {
+
+            //et on affiche le message de confirmation avec les données récupérées
             productContainer.innerHTML = 
             `<p>Merci pour votre commande.</p>
 
@@ -27,14 +26,9 @@ function commande(){
             
             <i class="fas fa-paw"></i> <i class="fas fa-paw"></i> <span class="abientot"> A BIENTÔT </span> <i class="fas fa-paw"></i> <i class="fas fa-paw"></i></p>`   
         });    
-    } else {
-        // message si la commande n'est pas validé
-        var div = document.createElement('div');
-        div.textContent = "Vous n'avez pas encore validé votre commande";
-        ourson.appendChild(div);
-    }
+    } 
 }
-// remise à zero de tous les sessions Storage.
+// remise à zero du sessionStorage grace au bouton "retour a l'accueil du site" et retour a index.html
 function retour(){
     sessionStorage.clear();
 }

@@ -238,10 +238,12 @@ if (panier == null || total == 0){
          if (this.readyState == XMLHttpRequest.DONE) {
            let confirmation = JSON.parse(this.responseText);
            sessionStorage.setItem('order', JSON.stringify(confirmation));
-           let prix = localStorage.getItem('prixTotal');
-           prix = JSON.parse(prix);
+           let prix = JSON.parse(localStorage.getItem('prixTotal'));
            sessionStorage.setItem('prix', JSON.stringify(prix));
+
+           //Des que la requete est envoyé, on bascule sur la page de confirmation de commande avec toutes les infos demandé : Id de commande, prix du panier
            window.location.href = "commande.html";
+           // on remet a zero le localstorage apres avoir valider la commande
            localStorage.clear();
          }
        };
