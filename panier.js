@@ -144,16 +144,24 @@ if (panier == null || total == 0){
  let products = [];
 
  // on fait une fonction pour récupérer les id des produits au panier, pour l'afficher dans la requete POST
-  function productId() {
-    let panier = JSON.parse(localStorage.getItem('panier'));
+ function productId(products) {
+  let panier = JSON.parse(localStorage.getItem('panier'));
+  
+  products = Object.values(panier).map( (data) => {
+    let qté = parseInt(data.qté);
+    console.log(typeof qté);
+    console.log(qté);
     
-         idProduct = Object.values(panier).map( (data) => {
-          products.push(data._id); 
-          return products;
-        });
-      
-    };
-    productId();
+    for (let i = 0 ; i< qté ; i ++){
+        products.push(data._id);  
+      }
+       console.log(products); 
+      return products; 
+     });
+ 
+  };
+  productId(products);
+  
     // Récupérer la valeur des champs saisis par le client
      
     let firstName = document.getElementById('firstname').value;
@@ -185,11 +193,11 @@ if (panier == null || total == 0){
   //afficher une alerte si il manque un renseignement et enregistrer les données dans le localStorage
   var prenom = document.getElementById('firstname');
   var oublisPrenom = document.getElementById('oublisPrenom');
-  var prenomValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+  var prenomValid = /^[a-zA-Z][a-z]+([a-zA-Z][a-z]+)?$/;
 
   var nom = document.getElementById('name');
   var oublisNom = document.getElementById('oublisNom');
-  var nomValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+  var nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a-z]+)?$/;
 
   var mail = document.getElementById('email');
   var oublisEmail = document.getElementById('oublisEmail');
@@ -201,7 +209,7 @@ if (panier == null || total == 0){
 
   var ville = document.getElementById('city');
   var oublisVille = document.getElementById('oublisVille');
-  var villeValid = /^[a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+([-'\s][a-zA-ZéèîïÉÈÎÏ][a-zéèêàçîï]+)?$/;
+  var villeValid = /^[a-zA-Zéèàêûçàôë]{2}[a-zA-Z-'\séèàêûçàôë]{0,38}$/;
 
   if (prenomValid.test(prenom.value) == false){
     oublisPrenom.textContent = "Format de votre prénom incorrect";
