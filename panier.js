@@ -193,11 +193,11 @@ if (panier == null || total == 0){
   //afficher une alerte si il manque un renseignement et enregistrer les données dans le localStorage
   var prenom = document.getElementById('firstname');
   var oublisPrenom = document.getElementById('oublisPrenom');
-  var prenomValid = /^[a-zA-Z][a-z]+([a-zA-Z][a-z]+)?$/;
+  var prenomValid = /^[a-zA-Z ,.'-]+$/;
 
   var nom = document.getElementById('name');
   var oublisNom = document.getElementById('oublisNom');
-  var nomValid = /^[a-zA-Z][a-z]+([-'\s][a-zA-Z][a-z]+)?$/;
+  var nomValid = /^[a-zA-Z ,.'-]+$/;
 
   var mail = document.getElementById('email');
   var oublisEmail = document.getElementById('oublisEmail');
@@ -205,11 +205,11 @@ if (panier == null || total == 0){
 
   var adresse = document.getElementById('address');
   var oublisAdress = document.getElementById('oublisAdress');
-  var adresseValid = /^[0-9]{1,3}(?:(?:[,. ]){1}[-a-zA-Zàâäéèêëïîôöùûüç]+)*/;
+  var adresseValid = /[0-9a-zA-Z]{1,3}[a-z ,.'-]+$/;
 
   var ville = document.getElementById('city');
   var oublisVille = document.getElementById('oublisVille');
-  var villeValid = /^[a-zA-Zéèàêûçàôë]{2}[a-zA-Z-'\séèàêûçàôë]{0,38}$/;
+  var villeValid = /^^[a-zA-Z ,.'-]+$/;
 
   if (prenomValid.test(prenom.value) == false){
     oublisPrenom.textContent = "Format de votre prénom incorrect";
@@ -248,11 +248,10 @@ if (panier == null || total == 0){
            sessionStorage.setItem('order', JSON.stringify(confirmation));
            let prix = JSON.parse(localStorage.getItem('prixTotal'));
            sessionStorage.setItem('prix', JSON.stringify(prix));
-
+          console.log(typeof prix);
+          console.log( prix);
            //Des que la requete est envoyé, on bascule sur la page de confirmation de commande avec toutes les infos demandé : Id de commande, prix du panier
            window.location.href = "commande.html";
-           // on remet a zero le localstorage apres avoir valider la commande
-           localStorage.clear();
          }
        };
   request.open("post", "http://localhost:3000/api/teddies/order");

@@ -30,6 +30,8 @@ function commande(){
 }
 // remise à zero du sessionStorage grace au bouton "retour a l'accueil du site" et retour a index.html
 function retour(){
+
+    localStorage.clear();
     sessionStorage.clear();
 }
 commande();
