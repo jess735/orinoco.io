@@ -25,7 +25,7 @@
          <div id="total"></div>
   
   
-    <form id="formulaire" method="post" action="http://localhost:3000/api/teddies/order">
+    <form id="formulaire" >
       <div class="form-row">
         <div class="form-group col-md-5">
             <label for="firstname">Prénom :</label>
@@ -51,7 +51,7 @@
             <input type="text" name="city" class="form-control" id="city" placeholder="Votre ville..." required><span id='oublisVille'></span><br>
         </div>
   
-      <button type="submit" id="valider">Valider mon panier</button>
+      <button type="button" onclick="achat()" id="valider">Valider mon panier</button>
      
     </form>
   
